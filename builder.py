@@ -13,6 +13,31 @@ DIRS = [
 ]
 
 
+FILES = {
+    '{project_slug}/requirements.txt': 'requiements.txt.template',
+    '{project_slug}/app.py': 'app.py.template',
+    '{project_slug}/static/css/{project_slug}.css': 'project.css.template',
+    '{project_slug}/static/js/{project_slug}.js': 'project.js.template',
+    '{project_slug}/template/index.html': 'project.html.template'
+}
+
+
+def flask_template_prepare(string):
+    string = re.sub(r'\{\%', '<%', string)
+    string = re.sub(r'\%\}', '%>', string)
+    string = re.sub(r'\{\{', '<<', string)
+    string = re.sub(r'\}\}', '>>', string)
+    return string
+
+
+def flask_template_repair(string):
+    string = re.sub(r'\<\%', '{%', string)
+    string = re.sub(r'\%\>', '%}', string)
+    string = re.sub(r'\<\<', '{{', string)
+    string = re.sub(r'\>\>', '}}', string)
+    return string
+
+
 def slugify(string):
     string = unicodedata.normalize('NFKC', string)
     string = re.sub(r'[^\w\s]', '', string).strip().lower()
@@ -61,6 +86,24 @@ def create_dirs(root, slug):
                 pass                
 
 
+def create_files(root, slug, name):
+    for file_name, template_name in FILES.items():
+        try:
+            template_file = open(os.path.join('templates', template_name))
+            file_content = template_file.read()
+            file_content = flask_template_prepare(file_content)
+            file_content = file_content.format(project_name=name, project_slug=slug)
+            file_content = flask_template_repair(file_content)
+
+            target_file = open(os.path.join(root, file_name.format(project_slug=slug)), 'w')
+            target_file.write(file_content)
+        except OSError:
+            print(f"Could created {file_name.format(project_slug=slug)}")
+        # finally:
+        #     template_file.close()
+        #     target_file.close()
+
+
 def main():
     project_root = get_root()
     check_delete_root(project_root)
@@ -69,6 +112,7 @@ def main():
         project_name = input("What is full name of project? ").strip()
     project_slug = slugify(project_name)
     create_dirs(project_root, project_slug)
+    create_files(project_root, project_slug, project_name)
     print(f"Creating {project_name} in {project_root}")
 
 
