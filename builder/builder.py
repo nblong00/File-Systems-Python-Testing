@@ -14,11 +14,11 @@ DIRS = [
 
 
 FILES = {
-    '{project_slug}/requirements.txt': 'requiements.txt.template',
-    '{project_slug}/app.py': 'app.py.template',
-    '{project_slug}/static/css/{project_slug}.css': 'project.css.template',
-    '{project_slug}/static/js/{project_slug}.js': 'project.js.template',
-    '{project_slug}/template/index.html': 'project.html.template'
+    '{project_slug}\\requirements.txt': 'requirements.txt.template',
+    '{project_slug}\\app.py': 'app.py.template',
+    '{project_slug}\\static\\css\\{project_slug}.css': 'project.css.template',
+    '{project_slug}\\static\\js\\{project_slug}.js': 'project.js.template',
+    '{project_slug}\\templates\\index.html': 'index.html.template'
 }
 
 
@@ -57,7 +57,7 @@ def check_delete_root(root):
     if os.path.exists(root):
         print("Path already exists...")
         try:
-            delete = input("Delete existing files/directorie? (y/n)").lower()
+            delete = input("Delete existing files/directories? (y/n)").lower()
             if delete in ['yes', 'ye', 'y']:
                 delete = True
         except ValueError:
@@ -89,7 +89,8 @@ def create_dirs(root, slug):
 def create_files(root, slug, name):
     for file_name, template_name in FILES.items():
         try:
-            template_file = open(os.path.join('templates', template_name))
+            print('Hi')
+            template_file = open(os.path.join(os.getcwd(), f'builder\\templates\\{template_name}'))
             file_content = template_file.read()
             file_content = flask_template_prepare(file_content)
             file_content = file_content.format(project_name=name, project_slug=slug)
@@ -98,10 +99,10 @@ def create_files(root, slug, name):
             target_file = open(os.path.join(root, file_name.format(project_slug=slug)), 'w')
             target_file.write(file_content)
         except OSError:
-            print(f"Could created {file_name.format(project_slug=slug)}")
-        # finally:
-        #     template_file.close()
-        #     target_file.close()
+            print(f"Couldn't create {file_name.format(project_slug=slug)}")
+        finally:
+            template_file.close()
+            target_file.close()
 
 
 def main():
