@@ -2,9 +2,36 @@ import os
 
 PATH = '..\\..\\ExploringGIT\\pythontesting'
 
-for item in os.listdir(PATH):
-    if '.' in item:
-        file_test = os.path.isfile(os.path.join(PATH, item))
-        print(f'This is a file: {file_test}')
-    else: 
-        print(f'This is a directory... [{item}]')
+
+def showcase_files_in_current_directory():
+    for item in os.listdir(PATH):
+        if '.' in item:
+            file_test = os.path.isfile(os.path.join(PATH, item))
+            print(f'{item} is a file: {file_test}')
+        else: 
+            print(f'{item} is a directory...')
+
+
+def menu_after_original_showcase():
+    while True:
+        print("""
+            \nChoose one of the below numbered options:
+            \r1) Explore lower directories
+            \r2) Close program...
+            """)
+        menu_decision = input("> ")
+        if menu_decision == '1':
+            pass
+        elif menu_decision == '2':
+            exit()
+        elif menu_decision not in ['1', '2']:
+            print('Invalid entry. Either enter the number 1 or 2.')
+            continue
+
+
+def main():
+    showcase_files_in_current_directory()
+    menu_after_original_showcase()
+
+
+main()
