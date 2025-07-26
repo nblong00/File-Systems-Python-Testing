@@ -1,19 +1,5 @@
 import os
-import time
 from datetime import datetime
-
-
-def file_input():
-    files = []
-    while True:
-        file_name = input('Enter file (with extension) to check if it exists in previously mentioned path: ')
-        time.sleep(0.5)
-        files.append(file_name)
-        add_another = input("Would you like to add another file to the check? (y/n) ")
-        if add_another in ['yes', 'ye', 'y']:
-            continue
-        else:
-            return files
 
 
 def timestamp_convert(path, name):
@@ -23,16 +9,17 @@ def timestamp_convert(path, name):
     return dt
 
 
-def dir_contains(filenames):
+def dir_contains():
     path = input('Enter relative or absolute path: ')
-    for name in filenames:
-        if name not in os.listdir(path):
-            print(f"{name} is not a file or directory within the supplied path...")
+    for name in os.listdir(path):
+        dt = timestamp_convert(path, name)
+        if os.path.isdir(os.path.join(path, name)):
+            print(f"\nFolder Name: {name}")
+            print(f"Last accessed: {dt}")
         else:
-            dt = timestamp_convert(path, name)
             print(f"\nFile Name: {name}")
-            print(f"Last accessed: {dt}\n")
-    input("Press ENTER to close program...")
+            print(f"Last accessed: {dt}")
+    print()
 
 
-dir_contains(file_input())
+dir_contains()
