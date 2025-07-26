@@ -14,11 +14,13 @@ def dir_contains():
     for name in os.listdir(path):
         dt = timestamp_convert(path, name)
         if os.path.isdir(os.path.join(path, name)):
-            print(f"\nFolder Name: {name}")
+            print(f"\nDirectory Name: {name}")
             print(f"Last accessed: {dt}")
+            print("Directory located at "+ (os.path.join(path, name)))
         else:
             print(f"\nFile Name: {name}")
             print(f"Last accessed: {dt}")
+            print("File located at " + (os.path.join(path, name)))
     print()
 
 
