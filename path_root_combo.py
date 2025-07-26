@@ -6,10 +6,13 @@ root =  input("Provie root: ")
 def absolute(path, root):
     if not os.path.isabs(path):
         fixed_path = os.path.join(root, path)
-        print("This is fixed!")
+        if not os.path.isabs(fixed_path):
+            print("\nPath and root provided cannot be combined to make absolute path. Try again...")
+            return fixed_path
+        print("\nThis is fixed!")
         return fixed_path
-    print("The path is already absolute...")
+    print("\nThe path is already absolute...")
     return path
 
-print(absolute(path, root))
-input("Press ENTER to close program...")
+print("Output path: " + absolute(path, root))
+input("\nPress ENTER to close program...")
