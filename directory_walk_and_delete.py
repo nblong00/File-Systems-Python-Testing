@@ -6,8 +6,8 @@ def remove_dir(path):
 
 
 def joined_path_creator(path, item):
-    copied_path = Path(path / item)
-    return copied_path
+    joined_path = Path(path / item)
+    return joined_path
 
 
 def directory_walk_and_delete(path):
