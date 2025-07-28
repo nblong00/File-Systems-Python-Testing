@@ -1,8 +1,6 @@
 import os
 import re
 
-path = '../../../pythontesting'
-
 
 def cleanup(path):
     for entry in os.listdir(path):
@@ -12,4 +10,10 @@ def cleanup(path):
         os.replace(os.path.join(path, entry), os.path.join(path, name_format))
 
 
-cleanup(path)
+def main():
+    path = '../../../pythontesting'
+    cleanup(path)
+
+
+if __name__ == '__main__':
+    main()
