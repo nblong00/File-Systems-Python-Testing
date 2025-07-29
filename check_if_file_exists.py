@@ -24,4 +24,8 @@ def dir_contains():
     print()
 
 
-dir_contains()
+def main():
+    dir_contains()
+
+if __name__ == '__main__':
+    main()
