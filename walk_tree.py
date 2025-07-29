@@ -1,12 +1,10 @@
 import os
 
-PATH = '..\\..\\ExploringGIT\\pythontesting'
 
-
-def showcase_files_in_current_directory():
-    for item in os.listdir(PATH):
+def showcase_files_in_current_directory(path):
+    for item in os.listdir(path):
         if '.' in item:
-            file_test = os.path.isfile(os.path.join(PATH, item))
+            file_test = os.path.isfile(os.path.join(path, item))
             print(f'{item} is a file: {file_test}')
         else: 
             print(f'{item} is a directory...')
@@ -30,8 +28,10 @@ def menu_after_original_showcase():
 
 
 def main():
-    showcase_files_in_current_directory()
+    path = '..\\..\\ExploringGIT\\pythontesting'
+    showcase_files_in_current_directory(path)
     menu_after_original_showcase()
 
 
-main()
+if __name__ == "__main__":
+    main()
