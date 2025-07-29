@@ -11,17 +11,22 @@ def remove_dups_from_email_list(emails):
     print(important_emails)
 
 
-def read_csv_compose_email_list(user_input):
-    with open(user_input, mode='r') as f:
-        reader = csv.reader(f)
-        next(reader)
-        emails = [email[10] for email in reader if email[10] != '']
-        return emails
+def read_csv_compose_email_list():
+    while True:
+        try:
+            user_input = gather_user_input()
+            with open(user_input, mode='r') as f:
+                reader = csv.reader(f)
+                next(reader)
+                emails = [email[10] for email in reader if email[10] != '']
+                return emails
+        except FileNotFoundError:
+            print("File not found...")
+            input("Press ENTER to try again...")
 
 
 def main():
-    user_input = gather_user_input()
-    emails = read_csv_compose_email_list(user_input)
+    emails = read_csv_compose_email_list()
     remove_dups_from_email_list(emails)
 
 
