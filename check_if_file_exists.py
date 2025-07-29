@@ -27,5 +27,6 @@ def dir_contains():
 def main():
     dir_contains()
 
+
 if __name__ == '__main__':
     main()
