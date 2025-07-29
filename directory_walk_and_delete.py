@@ -26,4 +26,5 @@ def app():
     directory_walk_and_delete(path)
 
 
-app()
+if __name__ == "__main__":
+    app()
