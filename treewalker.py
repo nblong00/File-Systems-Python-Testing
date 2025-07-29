@@ -17,4 +17,9 @@ def treewalker(start):
     print(start, "contains", total_files, "files with a combined size of", total_size, "bytes")
 
 
-treewalker("JavaScript")
+def main():
+    treewalker("JavaScript")
+
+
+if __name__ == '__main__':
+    main()
