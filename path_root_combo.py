@@ -1,7 +1,11 @@
 import os
 
-path = input("Provide path: ")
-root =  input("Provie root: ")
+
+def gather_user_input():
+    path = input("Provide path: ")
+    root =  input("Provie root: ")
+    return path, root
+
 
 def absolute(path, root):
     if not os.path.isabs(path):
@@ -14,5 +18,16 @@ def absolute(path, root):
     print("\nThe path is already absolute...")
     return path
 
-print("Output path: " + absolute(path, root))
-input("\nPress ENTER to close program...")
+
+def output_absolute_path(path, root):
+    print("Output path: " + absolute(path, root))
+    input("\nPress ENTER to close program...")
+
+
+def main():
+    (path, root) = gather_user_input()
+    output_absolute_path(path, root)
+
+
+if __name__ == "__main__":
+    main()
