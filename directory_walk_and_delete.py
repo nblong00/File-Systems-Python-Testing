@@ -1,10 +1,6 @@
 from pathlib import Path
 
 
-def remove_dir(path):
-    path.rmdir()
-
-
 def joined_path_creator(path, item):
     joined_path = Path(path / item)
     return joined_path
@@ -17,13 +13,30 @@ def directory_walk_and_delete(path):
             joined_path.unlink()
         for folder in dirs:
             joined_path = joined_path_creator(root, folder)
-            remove_dir(joined_path)
+            joined_path.rmdir()
+
+
+def check_if_entry_is_valid():
+    user_input = input("Enter the absolute or relative path: ")
+    path = Path(user_input)
+    if path.exists() == True:
+        if path.is_dir() == False:
+            print("Invalid... Entry needs to be a directory...")
+            input("Press Enter to try again...")
+            return "main-menu"
+        return path
+    else:
+        print("Entry invalid... Input needs to exist and be a directory...")
+        input("Press Enter to try again...")
+        return "main-menu"
 
 
 def app():
-    user_input = input('Enter the absolute or relative path: ')
-    path = Path(user_input)
-    directory_walk_and_delete(path)
+    while True:
+        path = check_if_entry_is_valid()
+        if path == "main-menu":
+            continue
+        directory_walk_and_delete(path)
 
 
 if __name__ == "__main__":
