@@ -49,6 +49,18 @@ def sort_directory_contents(path):
             items.append(item)
         for folder in dirs:
             folders.append(folder)
+    return items, folders
+
+
+def print_directory_contents(items, folders):
+    print("\nThis path currently contains-")
+    print("\nFiles:")
+    for item in items:
+        print(item)
+    print("\nDirectories:")
+    for folder in folders:
+        print(folder)
+    print()
 
 
 def app():
@@ -59,8 +71,9 @@ def app():
         path = check_if_directory_is_empty(path)
         if path == "main-menu":
             continue
-        sort_directory_contents(path)
-        directory_walk_and_delete(path)
+        (items, folders) = sort_directory_contents(path)
+        print_directory_contents(items, folders)
+        # directory_walk_and_delete(path)
 
 
 if __name__ == "__main__":
