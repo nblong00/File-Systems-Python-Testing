@@ -41,6 +41,16 @@ def check_if_directory_is_empty(path):
     return path
 
 
+def sort_directory_contents(path):
+    items = []
+    folders = []
+    for root, dirs, files in Path(path).walk():
+        for item in files:
+            items.append(item)
+        for folder in dirs:
+            folders.append(folder)
+
+
 def app():
     while True:
         path = check_if_entry_is_valid()
@@ -49,6 +59,7 @@ def app():
         path = check_if_directory_is_empty(path)
         if path == "main-menu":
             continue
+        sort_directory_contents(path)
         directory_walk_and_delete(path)
 
 
