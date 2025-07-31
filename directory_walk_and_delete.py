@@ -24,10 +24,6 @@ def check_if_entry_is_valid():
             print("Invalid... Entry needs to be a directory...")
             input("Press Enter to try again...")
             return "main-menu"
-        if path.stat().st_size == 0:
-            print("Invalid... Directory is empty...")
-            input("Press Enter to try again...")
-            return "main-menu"
         return path
     else:
         print("Entry invalid... Input needs to exist and be a directory...")
@@ -35,12 +31,25 @@ def check_if_entry_is_valid():
         return "main-menu"
 
 
+def check_if_directory_is_empty(path):
+    files = [item for item in path.iterdir() if item.is_file()]
+    directories = [item for item in path.iterdir() if item.is_dir()]
+    if not files and not directories:
+        print("Invalid... Directory is empty...")
+        input("Press Enter to try again...")
+        return "main-menu"
+    return path
+
+
 def app():
     while True:
         path = check_if_entry_is_valid()
         if path == "main-menu":
             continue
-        # directory_walk_and_delete(path)
+        path = check_if_directory_is_empty(path)
+        if path == "main-menu":
+            continue
+        directory_walk_and_delete(path)
 
 
 if __name__ == "__main__":
