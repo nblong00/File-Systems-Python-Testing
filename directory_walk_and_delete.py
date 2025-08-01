@@ -79,6 +79,19 @@ def ask_user_to_confirm_deletion():
             print("\nInvalid Entry... Enter either 'yes' or 'no' to the previous question...\n")
 
 
+def ask_if_user_wants_to_run_program_again():
+    print("Would you like to delete another directory's contents (yes/no):")
+    while True:
+        user_input = input("> ")
+        if user_input in ["yes", "ye", "y"]:
+            print("\nReturning to main-menu...\n")
+            break
+        elif user_input in ["no", "n"]:
+            exit()
+        elif user_input not in ["yes", "ye", "y", "no", "n"]:
+            print("\nInvalid Entry... Enter either 'yes' or 'no' to the previous question...\n")
+
+
 def app():
     while True:
         path = check_if_entry_is_valid()
@@ -93,6 +106,7 @@ def app():
         if exit_choice == "main-menu":
             continue
         directory_walk_and_delete(path)
+        ask_if_user_wants_to_run_program_again()
 
 
 if __name__ == "__main__":
