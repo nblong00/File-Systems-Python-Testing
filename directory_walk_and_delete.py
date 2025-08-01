@@ -6,16 +6,6 @@ def joined_path_creator(path, item):
     return joined_path
 
 
-def directory_walk_and_delete(path):
-    for root, dirs, files in Path(path).walk(top_down=False):
-        for item in files:
-            joined_path = joined_path_creator(root, item)
-            joined_path.unlink()
-        for folder in dirs:
-            joined_path = joined_path_creator(root, folder)
-            joined_path.rmdir()
-
-
 def check_if_entry_is_valid():
     user_input = input("Enter the absolute or relative path: ")
     path = Path(user_input)
@@ -90,6 +80,16 @@ def ask_if_user_wants_to_run_program_again():
             exit()
         elif user_input not in ["yes", "ye", "y", "no", "n"]:
             print("\nInvalid Entry... Enter either 'yes' or 'no' to the previous question...\n")
+
+
+def directory_walk_and_delete(path):
+    for root, dirs, files in Path(path).walk(top_down=False):
+        for item in files:
+            joined_path = joined_path_creator(root, item)
+            joined_path.unlink()
+        for folder in dirs:
+            joined_path = joined_path_creator(root, folder)
+            joined_path.rmdir()
 
 
 def app():
