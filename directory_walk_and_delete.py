@@ -53,11 +53,13 @@ def sort_directory_contents(path):
 
 
 def print_directory_contents(items, folders):
+    item_count = len(items)
+    folder_count = len(folders)
     print("\nThis path currently contains-")
-    print("\nFiles:")
+    print(f"\nFiles({item_count}):")
     for item in items:
         print(item)
-    print("\nDirectories:")
+    print(f"\nDirectories({folder_count}):")
     for folder in folders:
         print(folder)
     print()
