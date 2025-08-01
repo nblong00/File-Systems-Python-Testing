@@ -63,6 +63,20 @@ def print_directory_contents(items, folders):
     print()
 
 
+def ask_user_to_confirm_deletion():
+    print("Please confirm you want to delete the above items (yes/no):")
+    while True:
+        user_input = input("> ")
+        if user_input in ["yes", "ye", "y"]:
+            print()
+            return True
+        elif user_input in ["no", "n"]:
+            print("\nReturning to main-menu...\n")
+            return "main-menu"
+        elif user_input not in ["yes", "ye", "y", "no", "n"]:
+            print("\nInvalid Entry... Enter either 'yes' or 'no' to the previous question...\n")
+
+
 def app():
     while True:
         path = check_if_entry_is_valid()
@@ -73,7 +87,10 @@ def app():
             continue
         (items, folders) = sort_directory_contents(path)
         print_directory_contents(items, folders)
-        # directory_walk_and_delete(path)
+        exit_choice = ask_user_to_confirm_deletion()
+        if exit_choice == "main-menu":
+            continue
+        directory_walk_and_delete(path)
 
 
 if __name__ == "__main__":
