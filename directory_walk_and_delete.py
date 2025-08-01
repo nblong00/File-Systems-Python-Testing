@@ -1,4 +1,5 @@
 from pathlib import Path
+import time
 
 
 def joined_path_creator(path, item):
@@ -60,7 +61,13 @@ def ask_user_to_confirm_deletion():
     while True:
         user_input = input("> ")
         if user_input in ["yes", "ye", "y"]:
-            print()
+            time.sleep(0.5)
+            print("""
+                  \r--------------------
+                  \rCONTENTS DELETED!
+                  \r--------------------
+                  """)
+            time.sleep(0.5)
             return True
         elif user_input in ["no", "n"]:
             print("\nReturning to main-menu...\n")
