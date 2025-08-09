@@ -7,9 +7,8 @@ def joined_path_creator(path, item):
     return joined_path
 
 
-def check_if_entry_is_valid():
-    user_input = input("Enter the absolute or relative path: ")
-    path = Path(user_input)
+def check_if_entry_is_valid(): 
+    path = Path(input("Enter the absolute or relative path: "))
     if path.exists() == True:
         if path.is_dir() == False:
             print("Invalid... Entry needs to be a directory...")
@@ -33,13 +32,8 @@ def check_if_directory_is_empty(path):
 
 
 def sort_directory_contents(path):
-    items = []
-    folders = []
-    for root, dirs, files in Path(path).walk():
-        for item in files:
-            items.append(item)
-        for folder in dirs:
-            folders.append(folder)
+    items = [item for root, dirs, files in Path(path).walk() for item in files]
+    folders = [folder for root, dirs, files in Path(path).walk() for folder in dirs]
     return items, folders
 
 
