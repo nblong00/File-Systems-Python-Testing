@@ -8,7 +8,8 @@ def gather_user_input():
 
 def remove_dups_from_email_list(emails):
     important_emails = list({email for email in emails if emails.count(email) > 1})
-    print(important_emails)
+    for email in important_emails:
+        print(email)
 
 
 def read_csv_compose_email_list():
