@@ -3,17 +3,16 @@ import os
 
 def showcase_files_in_current_directory(path):
     for item in os.listdir(path):
-        if '.' in item:
-            file_test = os.path.isfile(os.path.join(path, item))
-            print(f'{item} is a file: {file_test}')
+        if os.path.isfile(os.path.join(path, item)) == True:
+            print(f'{item} is a file!')
         else: 
             print(f'{item} is a directory...')
 
 
-def menu_after_original_showcase():
+def menu_after_original_showcase(path):
     while True:
         print("""
-            \nChoose one of the below numbered options:
+            \rChoose one of the below numbered options:
             \r1) Explore lower directories
             \r2) Close program...
             """)
@@ -30,7 +29,7 @@ def menu_after_original_showcase():
 def main():
     path = '..\\..\\ExploringGIT\\pythontesting'
     showcase_files_in_current_directory(path)
-    menu_after_original_showcase()
+    menu_after_original_showcase(path)
 
 
 if __name__ == "__main__":
