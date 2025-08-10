@@ -9,6 +9,22 @@ def showcase_files_in_current_directory(path):
             print(f'{item} is a directory...')
 
 
+def sort_files_in_lower_directories(path):
+    items = [item for root, dirs, files in os.walk(path) for item in files]
+    folders = [folder for root, dirs, files in os.walk(path) for folder in dirs]
+    return items, folders
+
+
+def showcase_files_in_lower_directories(items, folders):
+    print("\nFolders in lower directories:\n")
+    for folder in folders:
+        print(folder)
+    print("\nFiles in lower directories:\n")
+    for item in items:
+        print(item)
+    print()
+
+
 def menu_after_original_showcase(path):
     while True:
         print("""
@@ -18,7 +34,10 @@ def menu_after_original_showcase(path):
             """)
         menu_decision = input("> ")
         if menu_decision == '1':
-            pass
+            (items, folders) = sort_files_in_lower_directories(path)
+            showcase_files_in_lower_directories(items, folders)
+            input("Press ENTER to close program...")
+            break
         elif menu_decision == '2':
             exit()
         elif menu_decision not in ['1', '2']:
