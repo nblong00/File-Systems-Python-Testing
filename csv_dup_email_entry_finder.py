@@ -20,6 +20,7 @@ def read_csv_compose_email_list():
                 reader = csv.reader(f)
                 next(reader)
                 emails = [email[10] for email in reader if email[10] != '']
+                print(emails)
                 return emails
         except FileNotFoundError:
             print("\nFile not found...")
